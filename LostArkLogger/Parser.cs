@@ -1,4 +1,5 @@
-﻿using K4os.Compression.LZ4;
+﻿using IronSnappy;
+using K4os.Compression.LZ4;
 using LostArkLogger.Utilities;
 using SharpPcap;
 using System;
@@ -241,7 +242,7 @@ namespace LostArkLogger
                         break;
                     case 2: //Snappy
                         //https://github.com/robertvazan/snappy.net
-                        payload = Snappy.SnappyCodec.Uncompress(payload.ToArray()).Skip(16).ToArray();
+                        payload = Snappy.Decode(payload.ToArray()).Skip(16).ToArray();
                         //payload = SnappyCodec.Uncompress(payload.Skip(Properties.Settings.Default.Region == Region.Russia ? 4 : 0).ToArray()).Skip(16).ToArray();
                         break;
                     case 3: //Oodle
